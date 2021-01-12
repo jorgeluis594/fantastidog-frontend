@@ -1,57 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Nav from './components/Nav';
+import Statistics from './features/statistics/Statistics';
+import Orders from "./features/orders/Orders";
+import OrderDetail from "./features/order/OrderDetail";
+import AddOrder from "./features/addOrder/AddOrder";
+import EditOrder from "./features/editOrder/editOrder";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <Nav/>
+      <Switch>
+        <Route path="/estadisticas" component={Statistics} />
+        <Route path="/pedidos/new" exact component={AddOrder} />
+        <Route path="/pedidos/:id/edit" exact component={EditOrder} />
+        <Route path="/pedidos/:id" component={OrderDetail} />
+        <Route path="/pedidos" component={Orders} />
+        <Route path="/" component={Statistics}/>
+      </Switch>
+    </Router>
   );
 }
 
